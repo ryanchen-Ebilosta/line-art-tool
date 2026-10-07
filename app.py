@@ -29,7 +29,7 @@ def safe_load_image(uploaded_file):
         # 如果不是透明的，直接转 RGB 确保兼容性
         image = image.convert("RGB")
 
-    # 3. 增加白边 (Padding) - 解决“多余边框线”问题
+    # 3. 增加白边 (Padding) - 解决多余边框线问题
     # 在四周增加 20 像素的白边
     image = ImageOps.expand(image, border=20, fill='white')
 
@@ -40,7 +40,7 @@ def process_image(pil_image, thresh, close_val, target_width, smooth_val, do_ske
     img_np = np.array(pil_image)
     img_gray = cv2.cvtColor(img_np, cv2.COLOR_RGB2GRAY)
 
-    # Web端处理：为了速度，限制一下最大分辨率
+    # Web端处理：为了速度，限制最大分辨率
     h, w = img_gray.shape
     if w > 2000:
         scale = 2000 / w
